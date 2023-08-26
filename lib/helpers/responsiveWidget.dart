@@ -19,38 +19,42 @@ class ResponsiveWidget extends StatelessWidget {
     this.customScreen,
   }) : super(key: key);
 
-  static bool isLargeScreen(Size deviceSize) =>
-      deviceSize.width >= largeScreenSize;
+  static bool isLargeScreen(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+    return deviceSize.width >= largeScreenSize;
+  }
 
-  static bool isMediumScreen(Size deviceSize) =>
-      deviceSize.width < largeScreenSize &&
-      deviceSize.width >= mediumScreenSize;
+  static bool isMediumScreen(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+    return deviceSize.width < largeScreenSize &&
+        deviceSize.width >= mediumScreenSize;
+  }
 
-  static bool isSmallScreen(Size deviceSize) =>
-      deviceSize.width < mediumScreenSize;
+  static bool isSmallScreen(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+    return deviceSize.width < mediumScreenSize;
+  }
 
-  static bool isCustomSize(Size deviceSize) =>
-      deviceSize.width <= customScreenSize &&
-      deviceSize.width >= mediumScreenSize;
+  static bool isCustomSize(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+    return deviceSize.width <= customScreenSize &&
+        deviceSize.width >= mediumScreenSize;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraint) {
-        final width = constraint.maxWidth;
+    return LayoutBuilder(builder: (context, constraint) {
+      final width = constraint.maxWidth;
 
-        if (width >= largeScreenSize) {
-          return largeScreen;
-        } else if (width < largeScreenSize && width >= mediumScreenSize) {
-          return mediumScreen ?? largeScreen;
-        } else if (width <= customScreenSize && width >= mediumScreenSize) {
-          return customScreen ?? largeScreen;
-        } else if (width < smallScreenSize) {
-          return smallScreen ?? largeScreen;
-        } else {
-          return largeScreen;
-        }
-      },
-    );
+      if (width >= largeScreenSize) {
+        return largeScreen;
+      } else if (width < largeScreenSize && width >= mediumScreenSize) {
+        return mediumScreen ?? largeScreen;
+      } else if (width <= customScreenSize && width >= mediumScreenSize) {
+        return customScreen ?? largeScreen;
+      } else {
+        return smallScreen ?? largeScreen;
+      }
+    });
   }
 }

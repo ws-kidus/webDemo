@@ -11,6 +11,5 @@ class AppTheme {
         TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
         TargetPlatform.iOS:FadeUpwardsPageTransitionsBuilder(),
       }),
-      primaryColor: Colors.tealAccent
   );
 }

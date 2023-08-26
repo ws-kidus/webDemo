@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:webdemo/constants/theme.dart';
+import 'package:webdemo/controllers/NavigatorController.dart';
+import 'package:webdemo/controllers/sideMenuController.dart';
 import 'package:webdemo/layout.dart';
 
 void main() {
+  Get.put(SideMenuController());
+  Get.put(NavigatorController());
   runApp(const MyApp());
 }
 
